@@ -6,7 +6,7 @@ import { ProductModule } from './product/product.module';
 import { Product } from "./product/entities/product.entity";
 import { Promo } from "./promo/entities/promo.entity";
 import { PromoModule } from './promo/promo.module';
-
+import { LedModule } from './led/led.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -22,8 +22,9 @@ import { PromoModule } from './promo/promo.module';
     }),
     ProductModule,
     PromoModule,
+    LedModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
