@@ -7,6 +7,8 @@ import { Product } from "./product/entities/product.entity";
 import { Promo } from "./promo/entities/promo.entity";
 import { PromoModule } from './promo/promo.module';
 import { LedModule } from './led/led.module';
+import { ClientModule } from './client/client.module';
+import { Client } from './client/entities/client.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -15,14 +17,15 @@ import { LedModule } from './led/led.module';
       port: 5432,
       password: '120102',
       username: 'postgres',
-      entities: [Product, Promo],
+      entities: [Product, Promo, Client],
       database: 'etk-sco',
       synchronize: true,
       logging: true,
     }),
     ProductModule,
     PromoModule,
-    LedModule
+    LedModule,
+    ClientModule
   ],
   controllers: [AppController],
   providers: [AppService],
