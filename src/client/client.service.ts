@@ -27,8 +27,12 @@ export class ClientService {
     return this.ClientRepository.find();
   }
 
-  findOne(num_tel: number) {
+  findByPhone(num_tel: number) {
     return this.ClientRepository.findOneBy({ num_tel });
+  }
+
+  findByQRCode(qr_code: string) {
+    return this.ClientRepository.findOneBy({ qr_code });
   }
 
   update(num_tel: number, updateClientDto: UpdateClientDto): Promise<Client> {

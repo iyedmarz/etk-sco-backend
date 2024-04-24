@@ -17,9 +17,14 @@ export class ClientController {
     return this.clientService.findAll();
   }
 
-  @Get(':num_tel')
-  findOne(@Param('num_tel') num_tel: number) {
-    return this.clientService.findOne(num_tel);
+  @Get('phone/:num_tel')
+  findByPhone(@Param('num_tel') num_tel: number) {
+    return this.clientService.findByPhone(num_tel);
+  }
+
+  @Get('qr/:qr_code')
+  findByQRCode(@Param('qr_code') qr_code: string) {
+    return this.clientService.findByQRCode(qr_code);
   }
 
   @Patch(':num_tel')
