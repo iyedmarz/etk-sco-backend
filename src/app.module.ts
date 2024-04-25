@@ -9,6 +9,7 @@ import { PromoModule } from './promo/promo.module';
 import { LedModule } from './led/led.module';
 import { ClientModule } from './client/client.module';
 import { Client } from './client/entities/client.entity';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -25,7 +26,8 @@ import { Client } from './client/entities/client.entity';
     ProductModule,
     PromoModule,
     LedModule,
-    ClientModule
+    ClientModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
