@@ -3,9 +3,13 @@ import { IsInt, IsNotEmpty, IsString } from "class-validator";
 export class CreateClientDto {
     @IsNotEmpty()
     @IsInt()
+    id: string;
+
+    @IsNotEmpty()
+    @IsInt()
     num_tel: number;
 
-    // @IsNotEmpty()
+    @IsNotEmpty()
     @IsString()
     qr_code: string;
 

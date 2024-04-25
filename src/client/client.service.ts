@@ -15,6 +15,7 @@ export class ClientService {
 
   create(createClientDto: CreateClientDto): Promise<Client> {
     const client: Client = new Client();
+    client.id = createClientDto.id;
     client.num_tel = createClientDto.num_tel;
     client.qr_code = createClientDto.qr_code;
     client.nom = createClientDto.nom;
@@ -27,6 +28,10 @@ export class ClientService {
     return this.ClientRepository.find();
   }
 
+  findOne(id: string) {
+    return this.ClientRepository.findOneBy({ id });
+  }
+
   findByPhone(num_tel: number) {
     return this.ClientRepository.findOneBy({ num_tel });
   }
@@ -37,7 +42,7 @@ export class ClientService {
 
   update(num_tel: number, updateClientDto: UpdateClientDto): Promise<Client> {
     const client: Client = new Client();
-    client.num_tel = num_tel;
+    client.num_tel = client.num_tel;
     client.qr_code = updateClientDto.qr_code;
     client.nom = updateClientDto.nom;
     client.addresse = updateClientDto.addresse;
