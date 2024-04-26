@@ -14,33 +14,32 @@ export class PrinterService {
     const printer = new ThermalPrinter({
       type: PrinterTypes.EPSON,
       interface: "tcp://192.168.2.215",
-      lineCharacter: '=',
+      width: 42,
+      lineCharacter: '-',
       breakLine: BreakLine.WORD,
       characterSet: CharacterSet.PC852_LATIN2,
-      removeSpecialCharacters: false,
+      removeSpecialCharacters: false
     });
 
     const connect = printer.isPrinterConnected();
     console.log(connect);
 
-    // printer.alignCenter();
-    await printer.printImage(this.Aures);  // Print PNG image
-    // printer.println("Welcome To  AURES !!!");
-    // printer.drawLine();
-    // printer.leftRight("Product", "$$$$");
-    // printer.leftRight("Product", "$$$$");
-    // printer.leftRight("Product", "$$$$");
-    // printer.leftRight("Product", "$$$$");
-    // printer.drawLine();
-    // printer.leftRight("Discount", "$$$$")
-    // printer.leftRight("Total", "$$$$")
-    // printer.drawLine();
-    // printer.println("THANK YOU")
-    printer.tableCustom([                               // Prints table with custom settings (text, align, width, bold)
-      { text: "Left", align: "LEFT", width: 0.29 },
-      { text: "Center", align: "CENTER", width: 0.29, bold: true },
-      { text: "Right", align: "RIGHT", width: 0.29 }
-    ]);
+    printer.alignCenter();
+    // await printer.printImage(this.Aures);  // Print PNG image
+    printer.println("Welcome To  AURES !!!");
+    printer.drawLine();
+    printer.leftRight("Product", "$$$$");
+    printer.leftRight("Product", "$$$$");
+    printer.leftRight("Product", "$$$$");
+    printer.leftRight("Product", "$$$$");
+    printer.drawLine();
+    printer.leftRight("Discount", "$$$$")
+    printer.leftRight("Total", "$$$$")
+    printer.drawLine();
+    printer.println("THANK YOU")
+
+
+    printer.drawLine()
 
     printer.cut();
 
