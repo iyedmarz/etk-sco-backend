@@ -9,7 +9,7 @@ export class Product {
     @Column({ type: 'varchar', length: 50 })
     name: string;
 
-    @Column({ type: 'int' })
+    @Column({ type: 'numeric' })
     price: number;
 
     @Column({ type: 'int' })
