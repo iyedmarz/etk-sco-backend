@@ -11,6 +11,8 @@ import { ClientModule } from './client/client.module';
 import { Client } from './client/entities/client.entity';
 import { AuthModule } from './auth/auth.module';
 import { PrinterModule } from './printer/printer.module';
+import { CommandeModule } from './Commande/commande.module';
+import { Commande } from './Commande/entities/commande.entity';
 
 @Module({
   imports: [
@@ -20,7 +22,7 @@ import { PrinterModule } from './printer/printer.module';
       port: 5432,
       password: '120102',
       username: 'postgres',
-      entities: [Product, Promo, Client],
+      entities: [Product, Promo, Client, Commande],
       database: 'etk-sco',
       synchronize: true,
       logging: true,
@@ -30,7 +32,8 @@ import { PrinterModule } from './printer/printer.module';
     LedModule,
     ClientModule,
     AuthModule,
-    PrinterModule
+    PrinterModule,
+    CommandeModule
   ],
   controllers: [AppController],
   providers: [AppService],
