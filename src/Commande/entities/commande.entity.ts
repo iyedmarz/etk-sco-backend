@@ -15,18 +15,19 @@ export class Commande {
     @Column({ nullable: true, type: 'int' })
     client_id: number;
 
-    @Column({ type: 'jsonb', nullable: true, array: true })
+    @Column({ type: 'json', nullable: true }) //, array: true 
     Products: {
         barcode: string;
         name: string;
         UnitPrice: number;
         qte: number;
         promoDiscount: {
-            promoid: string;
+            promoId: string;
             libelle: string;
+            percentage: number;
             discountMontant: number;
         };
-        TotalPriceProd: number;
+        totalPriceProd: number;
         pointFidProd: number;
     }
 

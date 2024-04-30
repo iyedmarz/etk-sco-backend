@@ -1,5 +1,53 @@
-import { IsNotEmpty, IsOptional, IsInt, IsNumber, IsString, IsDate, IsObject, ArrayMinSize } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsNotEmpty, IsOptional, IsInt, IsNumber, IsString, IsDate, IsObject, ArrayMinSize, ValidateNested, IsArray } from 'class-validator';
 
+class DiscountDto {
+    @IsString()
+    promoId: string;
+
+    @IsString()
+    libelle: string;
+
+    @IsNumber()
+    percentage: number;
+
+    @IsNumber()
+    discountMontant: number;
+}
+
+class ReglementDto {
+    @IsString()
+    payementMode: string;
+
+    @IsString()
+    payementAmount: string;
+}
+
+class commandeProductDto {
+    @IsString()
+    barcode: string;
+
+    @IsString()
+    name: string;
+
+    @IsNumber()
+    UnitPrice: number;
+
+    @IsNumber()
+    qte: number;
+
+    @ValidateNested()
+    @Type(() => DiscountDto)
+    promoDiscount: DiscountDto;
+
+    @IsNumber()
+    totalPriceProd: number;
+
+    @IsNumber()
+    pointFidProd: number;
+}
+
+// ** Creating Commande
 export class CreateCommandeDto {
     @IsInt()
     @IsNotEmpty()
@@ -18,43 +66,19 @@ export class CreateCommandeDto {
     client_id?: number;
 
     @IsNotEmpty()
-    @ArrayMinSize(1)
-    Products: {
+    @IsArray()
+    @ValidateNested()
+    @Type(() => commandeProductDto) // Specify the type as Object since the structure is dynamic
+    Products: commandeProductDto;
+    // @IsNotEmpty()
+    // @ValidateNested({ each: true })
+    // @Type(() => commandeProductDto)
+    // Products: commandeProductDto[]
 
-        barcode: string;
-
-        name: string;
-
-        UnitPrice: number;
-
-        qte: number;
-
-        promoDiscount: {
-
-            promoid: string;
-
-            libelle: string;
-
-            discountMontant: number;
-        };
-
-        TotalPriceProd: number;
-
-        pointFidProd: number;
-    };
-
-    @IsObject()
+    @ValidateNested()
+    @Type(() => DiscountDto)
     @IsOptional()
-    globalDiscount?: {
-
-        promoId: string;
-
-        libelle: string;
-
-        percentage: number;
-
-        discountMontant: number;
-    };
+    globalDiscount?: DiscountDto;
 
     @IsNumber()
     @IsOptional()
@@ -67,13 +91,9 @@ export class CreateCommandeDto {
     @IsOptional()
     deviseCode?: string;
 
-    @IsObject()
+    @ValidateNested()
+    @Type(() => ReglementDto)
     @IsOptional()
-    reglement?: {
-
-        payementMode: string;
-
-        payementAmount: string;
-    };
+    reglement?: ReglementDto;
 }
 

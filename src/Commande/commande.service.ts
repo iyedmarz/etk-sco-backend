@@ -13,13 +13,14 @@ export class CommandeService {
   ) { }
 
 
-  create(createCommandeDto: CreateCommandeDto): Promise<Commande> {
+  async create(createCommandeDto: CreateCommandeDto): Promise<Commande> {
     const commande: Commande = new Commande();
     commande.client_id = createCommandeDto.client_id
     commande.Products = createCommandeDto.Products
     commande.globalDiscount = createCommandeDto.globalDiscount
     commande.pointFidTotal = createCommandeDto.pointFidTotal
     commande.totalPrice = createCommandeDto.totalPrice
+    commande.reglement = createCommandeDto.reglement
     return this.commandeRepository.save(commande);
   }
 
