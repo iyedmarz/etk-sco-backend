@@ -23,19 +23,4 @@ export class CommandeController {
   deleteAll() {
     return this.commandeService.remove();
   }
-
-  // @Get(':barcode')
-  // findOne(@Param('barcode') barcode: string) {
-  //   return this.productService.findOne(barcode);
-  // }
-
-  // @Patch(':barcode')
-  // update(@Param('barcode') barcode: string, @Body() updateProductDto: UpdateProductDto) {
-  //   return this.productService.update(barcode, updateProductDto);
-  // }
-
-  // @Delete(':barcode')
-  // remove(@Param('barcode') barcode: string) {
-  //   return this.productService.remove(barcode);
-  // }
 }
