@@ -6,7 +6,7 @@ export class PrinterController {
   constructor(private readonly PrinterService: PrinterService) { }
 
   // locahost:5000/printer/test
-  @Post("print")
+  @Post()
   async print(): Promise<void> {
     await this.PrinterService.printTicket();
   }
