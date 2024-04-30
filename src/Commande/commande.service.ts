@@ -27,5 +27,12 @@ export class CommandeService {
   findAll(): Promise<Commande[]> {
     return this.commandeRepository.find();
   }
+  
+  async getLastInsertedCommande(): Promise<Commande> {
+    return await this.commandeRepository.findOne({ order: { id: 'DESC' } });
+  }
 
+  async remove(): Promise<void> {
+    await this.commandeRepository.query('DELETE FROM Commande');
+  }
 }

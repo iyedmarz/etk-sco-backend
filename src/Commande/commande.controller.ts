@@ -19,6 +19,11 @@ export class CommandeController {
     return this.commandeService.findAll();
   }
 
+  @Post('/all')
+  deleteAll() {
+    return this.commandeService.remove();
+  }
+
   // @Get(':barcode')
   // findOne(@Param('barcode') barcode: string) {
   //   return this.productService.findOne(barcode);
