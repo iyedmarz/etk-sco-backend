@@ -17,9 +17,9 @@ export class ClientController {
     return this.clientService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.clientService.findOne(id);
+  @Get('cin/:cin')
+  findByCin(@Param('cin') cin: string) {
+    return this.clientService.findByCin(cin);
   }
 
   @Get('phone/:num_tel')
@@ -27,18 +27,24 @@ export class ClientController {
     return this.clientService.findByPhone(num_tel);
   }
 
+  @Get('qr/:num_cartfid')
+  findByNum_CartFid(@Param('num_cartfid') num_cartfid: string) {
+    return this.clientService.findByNum_CartFid(num_cartfid);
+  }
+
   @Get('qr/:qr_code')
   findByQRCode(@Param('qr_code') qr_code: string) {
     return this.clientService.findByQRCode(qr_code);
   }
 
-  @Patch(':num_tel')
-  update(@Param('num_tel') num_tel: number, @Body() updateClientDto: UpdateClientDto) {
-    return this.clientService.update(num_tel, updateClientDto);
+  @Patch(':cin')
+  update(@Param('cin') cin: string, @Body() updateClientDto: UpdateClientDto) {
+    return this.clientService.update(cin, updateClientDto);
   }
 
-  @Delete(':num_tel')
-  remove(@Param('num_tel') num_tel: number) {
-    return this.clientService.remove(num_tel);
+  @Delete(':cin')
+  remove(@Param('cin') cin: string) {
+    return this.clientService.remove(cin);
   }
+
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
 import { Client } from './entities/client.entity';
@@ -10,47 +10,62 @@ import { Repository } from 'typeorm';
 export class ClientService {
 
   constructor(
-    @InjectRepository(Client) private readonly ClientRepository: Repository<Client>,
+    @InjectRepository(Client) private readonly clientRepository: Repository<Client>,
   ) { }
 
-  create(createClientDto: CreateClientDto): Promise<Client> {
+  async create(createClientDto: CreateClientDto): Promise<Client> {
+    const existingClient = await this.findByCin(createClientDto.cin);
+    if (existingClient) {
+      throw new Error("Client Already Exists");
+    }
     const client: Client = new Client();
+    client.cin = createClientDto.cin;
     client.id = createClientDto.id;
     client.num_tel = createClientDto.num_tel;
+    client.num_cartfid = createClientDto.num_cartfid;
     client.qr_code = createClientDto.qr_code;
     client.nom = createClientDto.nom;
     client.addresse = createClientDto.addresse;
     client.code_postal = createClientDto.code_postal;
-    return this.ClientRepository.save(client);
+    client.pts_Fidality = createClientDto.pts_Fidality;
+    return this.clientRepository.save(client);
   }
 
   findAll(): Promise<Client[]> {
-    return this.ClientRepository.find();
+    return this.clientRepository.find();
   }
 
   findOne(id: string) {
-    return this.ClientRepository.findOneBy({ id });
+    return this.clientRepository.findOneBy({ id });
+  }
+
+  findByCin(cin: string) {
+    return this.clientRepository.findOneBy({ cin });
   }
 
   findByPhone(num_tel: number) {
-    return this.ClientRepository.findOneBy({ num_tel });
+    return this.clientRepository.findOneBy({ num_tel });
+  }
+
+  findByNum_CartFid(num_cartfid: string) {
+    return this.clientRepository.findOneBy({ num_cartfid });
   }
 
   findByQRCode(qr_code: string) {
-    return this.ClientRepository.findOneBy({ qr_code });
+    return this.clientRepository.findOneBy({ qr_code });
   }
 
-  update(num_tel: number, updateClientDto: UpdateClientDto): Promise<Client> {
-    const client: Client = new Client();
-    client.num_tel = client.num_tel;
-    client.qr_code = updateClientDto.qr_code;
-    client.nom = updateClientDto.nom;
-    client.addresse = updateClientDto.addresse;
-    client.code_postal = updateClientDto.code_postal;
-    return this.ClientRepository.save(client);
+  async update(cin: string, updateClientDto: UpdateClientDto): Promise<Client> {
+    const client = await this.clientRepository.findOneBy({ cin });
+    if (!client) {
+      throw new NotFoundException('Client not found');
+    }
+    Object.assign(client, updateClientDto);
+    return this.clientRepository.save(client);
   }
 
-  remove(num_tel: number) {
-    return this.ClientRepository.delete({ num_tel });
+  remove(cin: string) {
+    return this.clientRepository.delete({ cin });
   }
+
 }

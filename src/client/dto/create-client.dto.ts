@@ -1,16 +1,26 @@
-import { IsInt, IsNotEmpty, IsString } from "class-validator";
+import { IsInt, IsNotEmpty, IsOptional, IsString, Length, Max, Min, MinLength } from "class-validator";
 
 export class CreateClientDto {
+
     @IsNotEmpty()
-    @IsInt()
+    @IsString()
+    @MinLength(8, { message: 'Identity Card must be at least 8 chars long' })
+    cin: string;
+
     id: string;
 
     @IsNotEmpty()
     @IsInt()
+    @Min(10000000, { message: 'num_tel must be at least 8 digits long' })
+    @Max(99999999999999, { message: 'num_tel must be at most 14 digits long' })
     num_tel: number;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
+    num_cartfid: string;
+
+    @IsString()
+    @IsOptional()
     qr_code: string;
 
     @IsString()
@@ -24,4 +34,9 @@ export class CreateClientDto {
     @IsString()
     @IsNotEmpty()
     code_postal: string;
+
+    @IsNotEmpty()
+    @IsInt()
+    @Min(0, { message: 'fidality points must be positive' })
+    pts_Fidality: number;
 }
