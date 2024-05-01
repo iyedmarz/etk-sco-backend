@@ -20,7 +20,7 @@ class ReglementDto {
     payementMode: string;
 
     @IsString()
-    payementAmount: string;
+    payementAmount: number;
 }
 
 class commandeProductDto {
@@ -93,6 +93,7 @@ export class CreateCommandeDto {
 
     @ValidateNested()
     @Type(() => ReglementDto)
+    @IsArray()
     @IsOptional()
     reglement?: ReglementDto;
 }

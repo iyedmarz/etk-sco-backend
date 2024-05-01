@@ -48,10 +48,10 @@ export class Commande {
     @Column({ type: 'varchar', default: "euro" })
     deviseCode: string;
 
-    @Column({ type: 'json', nullable: true })
+    @Column({ type: 'json', nullable: false }) //, array: true 
     reglement: {
         payementMode: string;
-        payementAmount: string;
+        payementAmount: number;
     }
 
 }

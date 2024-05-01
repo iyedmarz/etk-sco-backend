@@ -19,7 +19,7 @@ export class CommandeController {
     return this.commandeService.findAll();
   }
 
-  @Post('/all')
+  @Post('/delAll')
   deleteAll() {
     return this.commandeService.remove();
   }
