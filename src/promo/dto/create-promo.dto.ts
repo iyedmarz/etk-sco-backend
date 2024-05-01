@@ -1,15 +1,41 @@
 import {
     IsInt,
     IsNotEmpty,
+    IsNumber,
     IsString,
 } from 'class-validator';
 
 export class CreatePromoDto {
 
-    @IsString()
     @IsNotEmpty()
-    code: string;
+    @IsString()
+    codePromo: string;
 
+    @IsNotEmpty()
+    @IsString()
+    libelle: string;
+
+    @IsNotEmpty()
+    @IsNumber()
+    percentage: number;
+
+    @IsNotEmpty()
     @IsInt()
-    promotion: number;
+    totalNumberOfUse: number;
+
+    @IsNotEmpty()
+    @IsInt()
+    leftToUse: number;
+
+    @IsNotEmpty()
+    @IsString()
+    offerDate: Date;
+
+    @IsNotEmpty()
+    @IsString()
+    offerValidity: Date;
+
+    @IsNotEmpty()
+    @IsString()
+    offeredBybrand: string;
 }

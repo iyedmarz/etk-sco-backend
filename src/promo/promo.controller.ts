@@ -17,18 +17,18 @@ export class PromoController {
     return this.promoService.findAll();
   }
 
-  @Get(':code')
-  findOne(@Param('code') code: string) {
-    return this.promoService.findOne(code);
+  @Get(':codePromo')
+  findOne(@Param('codePromo') codePromo: string) {
+    return this.promoService.findOne(codePromo);
   }
 
-  @Patch(':code')
-  update(@Param('code') code: string, @Body() updatePromoDto: UpdatePromoDto) {
-    return this.promoService.update(code, updatePromoDto);
+  @Patch(':codePromo')
+  update(@Param('codePromo') codePromo: string, @Body() updatePromoDto: UpdatePromoDto) {
+    return this.promoService.update(codePromo, updatePromoDto);
   }
 
-  @Delete(':code')
-  remove(@Param('code') code: string) {
-    return this.promoService.remove(code);
+  @Delete(':codePromo')
+  remove(@Param('codePromo') codePromo: string) {
+    return this.promoService.remove(codePromo);
   }
 }
