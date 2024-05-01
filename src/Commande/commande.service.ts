@@ -60,27 +60,55 @@ export class CommandeService {
     const connect = printer.isPrinterConnected();
     console.log(connect);
 
-    // const jsonObject = ;
-
     printer.alignCenter();
     // await printer.printImage(this.Aures);  // Print PNG image
-    console.log("commande id :", commande)
-    printer.println(`${commande.client_id}`);
+    printer.println("AURES Groupe");
+    printer.newLine();
+    printer.code128("Code128");
+    printer.newLine();
+    printer.alignLeft();
+    printer.println(`Ticket n°${commande.id} du ${commande.dateCommande}`);
+    printer.println(`Caisse : ${commande.bornID}`);
+    printer.println(`Client : ${commande.client_id}`);
+    printer.newLine();
+    printer.tableCustom([
+      { text: "Article", align: "LEFT", width: 0.5 },
+      { text: "Qté", align: "CENTER", width: 0.2 },
+      { text: "Prix", align: "RIGHT", width: 0.3 }
+    ]);
     printer.drawLine();
-    printer.leftRight("Product", "$$$$");
+    let nbrProd = 0
+    let i = 0
+    let prod = commande.Products[0]
+    while ((prod == undefined)) {
+      printer.tableCustom([
+        { text: `${commande.Products[i].name}`, align: "LEFT", width: 0.6 },
+        { text: `${commande.Products[i].qte}`, align: "CENTER", width: 0.2 },
+        { text: `${commande.Products[i].totalPriceProd}`, align: "RIGHT", width: 0.2 }
+      ]);
+      console.log("in loop")
+      nbrProd += commande.Products[i].qte
+      prod = commande.Products[i]
+      i += 1
+    }
+
+    console.log("ouuuuuut loop")
+
+    printer.newLine();
     printer.drawLine();
-    printer.leftRight("Discount", `${commande.globalDiscount} `)
-    printer.leftRight("Total", `${commande.totalPrice} `)
+    printer.newLine();
+    printer.leftRight("Nombres d'articles", `${nbrProd} `)
+    printer.leftRight("Total en Euro", `${commande.totalPrice} `)
+    printer.newLine();
     printer.drawLine();
+    printer.newLine();
+    printer.alignCenter();
     printer.println("THANK YOU")
-
-
-    printer.drawLine()
 
     printer.cut();
 
-    // const execute = await printer.execute();
-    // printer.clear();
+    const execute = await printer.execute();
+    printer.clear();
 
   }
 }
