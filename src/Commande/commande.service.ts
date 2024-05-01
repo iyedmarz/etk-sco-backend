@@ -16,9 +16,10 @@ export class CommandeService {
 
   async create(createCommandeDto: CreateCommandeDto): Promise<Commande> {
     const commande: Commande = new Commande();
+    const dateCommande = new Date();
     commande.id = createCommandeDto.id
     commande.bornID = createCommandeDto.bornID
-    commande.dateCommande = createCommandeDto.dateCommande
+    commande.dateCommande = dateCommande
     commande.client_id = createCommandeDto.client_id
     commande.Products = createCommandeDto.Products
     commande.globalDiscount = createCommandeDto.globalDiscount
@@ -33,8 +34,12 @@ export class CommandeService {
     return this.commandeRepository.find();
   }
 
-  findOne(id: number): Promise<Commande> {
+  findById(id: number): Promise<Commande> {
     return this.commandeRepository.findOneBy({ id });
+  }
+
+  findByClientId(client_id: string): Promise<Commande> {
+    return this.commandeRepository.findOneBy({ client_id });
   }
 
   async remove(): Promise<void> {

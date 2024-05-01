@@ -19,7 +19,7 @@ class ReglementDto {
     @IsString()
     payementMode: string;
 
-    @IsString()
+    @IsNumber()
     payementAmount: number;
 }
 
@@ -49,21 +49,20 @@ class commandeProductDto {
 
 // ** Creating Commande
 export class CreateCommandeDto {
-    @IsInt()
-    @IsNotEmpty()
+
     id: number;
 
     @IsString()
     @IsOptional()
     bornID?: string;
 
-    @IsDate()
+    @IsString()
     @IsOptional()
     dateCommande?: Date;
 
-    @IsInt()
+    @IsString()
     @IsOptional()
-    client_id?: number;
+    client_id?: string;
 
     @IsNotEmpty()
     @IsArray()

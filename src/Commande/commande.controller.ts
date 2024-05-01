@@ -19,6 +19,17 @@ export class CommandeController {
     return this.commandeService.findAll();
   }
 
+  @Get(':id')
+  findById(@Param('id') id: number) {
+    return this.commandeService.findById(id);
+  }
+
+
+  @Get(':client_id')
+  findByClientId(@Param('client_id') client_id: string) {
+    return this.commandeService.findByClientId(client_id);
+  }
+
   @Post('/delAll')
   deleteAll() {
     return this.commandeService.remove();

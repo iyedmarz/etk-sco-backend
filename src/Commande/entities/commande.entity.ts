@@ -9,13 +9,13 @@ export class Commande {
     @Column({ type: 'varchar', default: "SCO-1" })
     bornID: string;
 
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    @Column({ type: 'timestamp' })
     dateCommande: Date;
 
-    @Column({ nullable: true, type: 'int' })
-    client_id: number;
+    @Column({ type: 'varchar', nullable: true })
+    client_id: string;
 
-    @Column({ type: 'json', nullable: true }) //, array: true 
+    @Column({ type: 'json' }) //, array: true 
     Products: {
         barcode: string;
         name: string;
@@ -39,7 +39,7 @@ export class Commande {
         discountMontant: number;
     }
 
-    @Column({ type: 'int', nullable: true })
+    @Column({ type: 'int' })
     pointFidTotal: number;
 
     @Column({ type: 'numeric', precision: 10, scale: 2 })
@@ -48,7 +48,7 @@ export class Commande {
     @Column({ type: 'varchar', default: "euro" })
     deviseCode: string;
 
-    @Column({ type: 'json', nullable: false }) //, array: true 
+    @Column({ type: 'json' }) //, array: true 
     reglement: {
         payementMode: string;
         payementAmount: number;
