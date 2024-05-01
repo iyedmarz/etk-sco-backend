@@ -22,9 +22,7 @@ export class Commande {
         UnitPrice: number;
         qte: number;
         promoDiscount: {
-            promoId: string;
-            libelle: string;
-            percentage: number;
+            codePromo: string;
             discountMontant: number;
         };
         totalPriceProd: number;
@@ -33,9 +31,7 @@ export class Commande {
 
     @Column({ type: 'json', nullable: true })
     globalDiscount: {
-        promoId: string;
-        libelle: string;
-        percentage: number;
+        codePromo: string;
         discountMontant: number;
     }
 

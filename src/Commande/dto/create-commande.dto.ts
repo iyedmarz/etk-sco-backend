@@ -3,13 +3,7 @@ import { IsNotEmpty, IsOptional, IsInt, IsNumber, IsString, IsDate, IsObject, Ar
 
 class DiscountDto {
     @IsString()
-    promoId: string;
-
-    @IsString()
-    libelle: string;
-
-    @IsNumber()
-    percentage: number;
+    codePromo: string;
 
     @IsNumber()
     discountMontant: number;
