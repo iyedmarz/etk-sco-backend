@@ -16,9 +16,6 @@ export class Client {
     @Column({ type: 'varchar', length: 50, nullable: true })
     num_cartfid: string;
 
-    @Column({ type: 'varchar', length: 50, nullable: true })
-    qr_code: string;
-
     @Column({ type: 'varchar', length: 50 })
     nom: string;
 

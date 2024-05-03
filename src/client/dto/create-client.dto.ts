@@ -20,10 +20,6 @@ export class CreateClientDto {
     num_cartfid: string;
 
     @IsString()
-    @IsOptional()
-    qr_code: string;
-
-    @IsString()
     @IsNotEmpty()
     nom: string;
 

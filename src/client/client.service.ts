@@ -23,7 +23,6 @@ export class ClientService {
     client.id = createClientDto.id;
     client.num_tel = createClientDto.num_tel;
     client.num_cartfid = createClientDto.num_cartfid;
-    client.qr_code = createClientDto.qr_code;
     client.nom = createClientDto.nom;
     client.addresse = createClientDto.addresse;
     client.code_postal = createClientDto.code_postal;
@@ -49,10 +48,6 @@ export class ClientService {
 
   findByNum_CartFid(num_cartfid: string) {
     return this.clientRepository.findOneBy({ num_cartfid });
-  }
-
-  findByQRCode(qr_code: string) {
-    return this.clientRepository.findOneBy({ qr_code });
   }
 
   async update(cin: string, updateClientDto: UpdateClientDto): Promise<Client> {
