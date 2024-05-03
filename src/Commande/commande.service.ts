@@ -24,7 +24,6 @@ export class CommandeService {
     commande.pointFidTotal = createCommandeDto.pointFidTotal
     commande.totalPrice = createCommandeDto.totalPrice
     commande.reglement = createCommandeDto.reglement
-
     const savedCommande = await this.commandeRepository.save(commande);
     commande.id = savedCommande.id;
     commande.bornID = savedCommande.bornID;
@@ -64,7 +63,7 @@ export class CommandeService {
     console.log(connect);
 
     printer.alignCenter();
-    // await printer.printImage(this.Aures);  // Print PNG image
+    printer.printImage("./aures.png")
     printer.println("AURES Groupe");
     printer.newLine();
     printer.code128(`${commande.id}`);
@@ -84,9 +83,9 @@ export class CommandeService {
     const len = commande.Products.length
     for (let i = 0; i < len; i++) {
       printer.tableCustom([
-        { text: `${commande.Products[i].name}`, align: "LEFT", width: 0.6 },
+        { text: `${commande.Products[i].name}`, align: "LEFT", width: 0.5 },
         { text: `${commande.Products[i].qte}`, align: "CENTER", width: 0.2 },
-        { text: `${commande.Products[i].totalPriceProd}`, align: "RIGHT", width: 0.2 }
+        { text: `${commande.Products[i].totalPriceProd}`, align: "RIGHT", width: 0.3 }
       ]);
       nbrProd += commande.Products[i].qte
     }
@@ -104,8 +103,8 @@ export class CommandeService {
 
     printer.cut();
 
-    // const execute = await printer.execute();
-    // printer.clear();
+    const execute = await printer.execute();
+    printer.clear();
 
   }
 }

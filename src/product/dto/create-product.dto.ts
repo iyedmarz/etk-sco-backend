@@ -10,7 +10,7 @@ import {
 export class CreateProductDto {
 
     @IsString()
-    @MinLength(13, { message: 'barcode must have 13 characters.' })
+    @MinLength(13, { message: 'barcode must have 13 characters minimum.' })
     @IsNotEmpty()
     barcode: string;
 
@@ -23,6 +23,11 @@ export class CreateProductDto {
     @IsNotEmpty()
     @MinLength(2, { message: 'Ur name must have atleast 2 characters.' })
     name: string;
+
+    @IsString()
+    @IsNotEmpty()
+    @MinLength(2, { message: 'Ur name must have atleast 2 characters.' })
+    category: string;
 
     @IsNotEmpty()
     @IsNumber()

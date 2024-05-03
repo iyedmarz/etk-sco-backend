@@ -21,6 +21,7 @@ export class ProductService {
     product.barcode = createProductDto.barcode;
     product.brand = createProductDto.brand;
     product.name = createProductDto.name;
+    product.category = createProductDto.category;
     product.priceUnit = createProductDto.priceUnit;
     product.quantity = createProductDto.quantity;
     product.pts_fid = createProductDto.pts_fid;
