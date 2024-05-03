@@ -38,4 +38,8 @@ export class CreatePromoDto {
     @IsNotEmpty()
     @IsString()
     offeredBybrand: string;
+
+    @IsNotEmpty()
+    @IsString()
+    uuidBrand: string;
 }
