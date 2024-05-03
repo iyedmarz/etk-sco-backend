@@ -26,7 +26,6 @@ export class PromoService {
     promo.offerDate = createPromoDto.offerDate
     promo.offerValidity = createPromoDto.offerValidity
     promo.offeredBybrand = createPromoDto.offeredBybrand
-    promo.uuidBrand = createPromoDto.uuidBrand
     return this.PromoRepository.save(promo);
   }
 

@@ -26,7 +26,4 @@ export class Promo {
 
     @Column({ type: 'varchar' })
     offeredBybrand: string;
-
-    @Column({ type: 'varchar' })
-    uuidBrand: string;
 }

@@ -39,7 +39,4 @@ export class CreatePromoDto {
     @IsString()
     offeredBybrand: string;
 
-    @IsNotEmpty()
-    @IsString()
-    uuidBrand: string;
 }
