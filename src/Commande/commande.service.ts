@@ -17,8 +17,6 @@ export class CommandeService {
   async create(createCommandeDto: CreateCommandeDto): Promise<Commande> {
     const commande: Commande = new Commande();
     const dateCommande = new Date();
-    commande.id = createCommandeDto.id
-    commande.bornID = createCommandeDto.bornID
     commande.dateCommande = dateCommande
     commande.client_id = createCommandeDto.client_id
     commande.Products = createCommandeDto.Products
@@ -26,8 +24,13 @@ export class CommandeService {
     commande.pointFidTotal = createCommandeDto.pointFidTotal
     commande.totalPrice = createCommandeDto.totalPrice
     commande.reglement = createCommandeDto.reglement
+
+    const savedCommande = await this.commandeRepository.save(commande);
+    commande.id = savedCommande.id;
+    commande.bornID = savedCommande.bornID;
+    commande.deviseCode = savedCommande.deviseCode;
     this.printTicket(commande)
-    return this.commandeRepository.save(commande);
+    return savedCommande;
   }
 
   findAll(): Promise<Commande[]> {
@@ -64,7 +67,7 @@ export class CommandeService {
     // await printer.printImage(this.Aures);  // Print PNG image
     printer.println("AURES Groupe");
     printer.newLine();
-    printer.code128("Code128");
+    printer.code128(`${commande.id}`);
     printer.newLine();
     printer.alignLeft();
     printer.println(`Ticket n°${commande.id} du ${commande.dateCommande}`);
@@ -78,21 +81,15 @@ export class CommandeService {
     ]);
     printer.drawLine();
     let nbrProd = 0
-    let i = 0
-    let prod = commande.Products[0]
-    while ((prod == undefined)) {
+    const len = commande.Products.length
+    for (let i = 0; i < len; i++) {
       printer.tableCustom([
         { text: `${commande.Products[i].name}`, align: "LEFT", width: 0.6 },
         { text: `${commande.Products[i].qte}`, align: "CENTER", width: 0.2 },
         { text: `${commande.Products[i].totalPriceProd}`, align: "RIGHT", width: 0.2 }
       ]);
-      console.log("in loop")
       nbrProd += commande.Products[i].qte
-      prod = commande.Products[i]
-      i += 1
     }
-
-    console.log("ouuuuuut loop")
 
     printer.newLine();
     printer.drawLine();
@@ -107,8 +104,8 @@ export class CommandeService {
 
     printer.cut();
 
-    const execute = await printer.execute();
-    printer.clear();
+    // const execute = await printer.execute();
+    // printer.clear();
 
   }
 }

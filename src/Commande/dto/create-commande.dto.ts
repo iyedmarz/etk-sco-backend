@@ -61,17 +61,14 @@ export class CreateCommandeDto {
     @IsNotEmpty()
     @IsArray()
     @ValidateNested()
-    @Type(() => commandeProductDto) // Specify the type as Object since the structure is dynamic
-    Products: commandeProductDto;
-    // @IsNotEmpty()
-    // @ValidateNested({ each: true })
-    // @Type(() => commandeProductDto)
-    // Products: commandeProductDto[]
+    @Type(() => commandeProductDto) 
+    Products: [];
+
 
     @ValidateNested()
     @Type(() => DiscountDto)
     @IsOptional()
-    globalDiscount?: DiscountDto;
+    globalDiscount?: any;
 
     @IsNumber()
     @IsOptional()
@@ -88,6 +85,6 @@ export class CreateCommandeDto {
     @Type(() => ReglementDto)
     @IsArray()
     @IsOptional()
-    reglement?: ReglementDto;
+    reglement?: [];
 }
 
