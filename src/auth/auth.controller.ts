@@ -22,10 +22,4 @@ export class AuthController {
 
     }
 
-    @Post('qrCode')
-    async authenticateWithQRCode(@Body() body: { qrCode: string }): Promise<any> {
-        const payload = await this.authService.validateQRCode(body.qrCode);
-        const token = await this.authService.generateJwtToken(payload);
-        return { token };
-    }
 }

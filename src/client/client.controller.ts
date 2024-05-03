@@ -32,11 +32,6 @@ export class ClientController {
     return this.clientService.findByNum_CartFid(num_cartfid);
   }
 
-  @Get('qr/:qr_code')
-  findByQRCode(@Param('qr_code') qr_code: string) {
-    return this.clientService.findByQRCode(qr_code);
-  }
-
   @Patch(':cin')
   update(@Param('cin') cin: string, @Body() updateClientDto: UpdateClientDto) {
     return this.clientService.update(cin, updateClientDto);

@@ -17,9 +17,6 @@ export class AuthService {
         return null;
     }
 
-    async validateQRCode(qrCode: string): Promise<any> {
-        const client = await this.clientService.findByQRCode(qrCode);
-    }
 
     async generateJwtToken(payload: any): Promise<string> {
         return this.jwtService.sign(payload);
