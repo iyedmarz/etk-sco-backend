@@ -63,7 +63,7 @@ export class Commande {
     @Column({ type: 'int' })
     pointFidTotal: number;
 
-    @Column({ type: 'numeric', precision: 10, scale: 2 })
+    @Column({ type: 'numeric', precision: 10, scale: 3 })
     totalPrice: number;
 
     @Column({ type: 'varchar', default: "euro" })
