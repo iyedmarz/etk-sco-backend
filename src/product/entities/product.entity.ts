@@ -15,7 +15,7 @@ export class Product {
     @Column({ type: 'varchar' })
     category: string;
 
-    @Column({ type: 'numeric' })
+    @Column({ type: 'float', nullable: false })
     priceUnit: number;
 
     @Column({ type: 'int' })
@@ -23,4 +23,7 @@ export class Product {
 
     @Column({ type: 'int' })
     pts_fid: number;
+
+    @Column({ type: 'varchar', nullable: true })
+    Img: string;
 }

@@ -69,7 +69,7 @@ export class Commande {
     @Column({ type: 'varchar', default: "euro" })
     deviseCode: string;
 
-    @Column({ type: 'json' }) //, array: true 
+    @Column({ type: 'json', nullable: true }) //, array: true 
     reglement: ReglementDto[]
 
 }
