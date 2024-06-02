@@ -33,8 +33,12 @@ export class PromoService {
     return this.PromoRepository.find();
   }
 
-  findOne(codePromo: string): Promise<Promo> {
-    return this.PromoRepository.findOneBy({ codePromo });
+  async findOne(codePromo: string): Promise<Promo> {
+    const promo = await this.PromoRepository.findOneBy({ codePromo });
+    if (!promo) {
+      throw new NotFoundException(`Promo code ${codePromo} not found`);
+    }
+    return promo;
   }
 
   async update(codePromo: string, updatePromoDto: UpdatePromoDto): Promise<Promo> {

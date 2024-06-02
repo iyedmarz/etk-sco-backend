@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -20,6 +20,12 @@ export class ProductController {
   @Get(':barcode')
   findOne(@Param('barcode') barcode: string) {
     return this.productService.findOne(barcode);
+  }
+
+  @Get()
+  getProducts(@Query('q') query: string) {
+    console.log(query)
+    return this.productService.findProductsByQuery(query);
   }
 
   @Patch(':barcode')

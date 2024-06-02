@@ -13,6 +13,9 @@ import { AuthModule } from './auth/auth.module';
 import { PrinterModule } from './printer/printer.module';
 import { CommandeModule } from './Commande/commande.module';
 import { Commande } from './Commande/entities/commande.entity';
+// import { PaymentModule } from './payment/payment.module';
+import { ManagerModule } from './manager/manager.module';
+import { Manager } from './manager/entities/manager.entity';
 
 @Module({
   imports: [
@@ -22,7 +25,7 @@ import { Commande } from './Commande/entities/commande.entity';
       port: 5432,
       password: '120102',
       username: 'postgres',
-      entities: [Product, Promo, Client, Commande],
+      entities: [Product, Promo, Client, Commande, Manager],
       database: 'etk-sco',
       synchronize: true,
       logging: true,
@@ -33,7 +36,9 @@ import { Commande } from './Commande/entities/commande.entity';
     ClientModule,
     AuthModule,
     PrinterModule,
-    CommandeModule
+    CommandeModule,
+    // PaymentModule,
+    ManagerModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -17,7 +17,7 @@ export class PromoController {
     return this.promoService.findAll();
   }
 
-  @Get(':codePromo')
+  @Get('one/:codePromo')
   findOne(@Param('codePromo') codePromo: string) {
     return this.promoService.findOne(codePromo);
   }

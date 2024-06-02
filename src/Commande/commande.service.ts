@@ -28,7 +28,8 @@ export class CommandeService {
     commande.id = savedCommande.id;
     commande.bornID = savedCommande.bornID;
     commande.deviseCode = savedCommande.deviseCode;
-    this.printTicket(commande)
+    // await this.productStock(commande)
+    // await this.printTicket(commande)
     return savedCommande;
   }
 
@@ -48,6 +49,18 @@ export class CommandeService {
     await this.commandeRepository.query('DELETE FROM Commande');
   }
 
+  async productStock(commande: Commande): Promise<void> {
+    // for (const product of commande.Products) {
+    //   await axios.post(`http://products-api/products/${product.id}/decrement-quantity`, {
+    //     quantity: product.quantity
+    //   });
+    // }
+  }
+
+  async promovalidity(): Promise<void> {
+
+  }
+
   async printTicket(commande: Commande): Promise<void> {
     const printer = new ThermalPrinter({
       type: PrinterTypes.EPSON,
@@ -63,7 +76,7 @@ export class CommandeService {
     console.log(connect);
 
     printer.alignCenter();
-    printer.printImage("./aures.png")
+    // printer.printImage("./aures.png")
     printer.println("AURES Groupe");
     printer.newLine();
     printer.code128(`${commande.id}`);

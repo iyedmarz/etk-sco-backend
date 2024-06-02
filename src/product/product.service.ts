@@ -36,6 +36,16 @@ export class ProductService {
     return this.productRepository.findOneBy({ barcode });
   }
 
+  async findProductsByQuery(query: string): Promise<Product[]> {
+    console.log(query)
+    return this.productRepository
+      .createQueryBuilder('product')
+      .where('product.brand LIKE :query', { query: `%${query}%` })
+      .orWhere('product.name LIKE :query', { query: `%${query}%` })
+      .orWhere('product.barcode LIKE :query', { query: `%${query}%` })
+      .getMany();
+  }
+
   async update(barcode: string, updateProductDto: UpdateProductDto): Promise<Product> {
     const product = await this.productRepository.findOneBy({ barcode });
     if (!product) {
